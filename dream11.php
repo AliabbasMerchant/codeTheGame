@@ -99,8 +99,6 @@
                     $points = $value['points'];
                     echo "<tr><td><a href='player.php?name=".$name." '> ",$name,"</a></td><td>",$role,"</td><td>",$team,"</td><td>",$points,"</td></tr>" ;
                 }
-                // $temperatureMin = $json['daily']['data'][0]['temperatureMin'];
-                // echo "<tr><td> Player Name </td><td> Role </td><td> Team </td><td> Points </td></tr>" ;
             ?>
         </table>
     </body>
