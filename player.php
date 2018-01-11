@@ -61,12 +61,6 @@
                 font-size: 100%;
             }
         </style>
-        <!-- <script type = "text/javascript">
-            document.getElementById("Dream11").onclick = function() {
-                window.open('dream11.html');
-                // <a href = ""> </a>
-            }
-        </script> -->
     </head>
     <body>
         <div class = "header">
@@ -101,8 +95,6 @@
                         }
                     }
                 }
-                // $temperatureMin = $json['daily']['data'][0]['temperatureMin'];
-                // echo "<tr><td> Player Name </td><td> Role </td><td> Team </td><td> Points </td></tr>" ;
             ?>
         </table>
     </body>
