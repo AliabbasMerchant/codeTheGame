@@ -1,9 +1,7 @@
 <html>
     <head>
         <title>
-            <?php
-
-            ?>
+            CodeTheGame - CO1531
         </title>
         <style type="text/css">
             p {
@@ -61,12 +59,6 @@
                 font-size: 100%;
             }
         </style>
-        <!-- <script type = "text/javascript">
-            document.getElementById("Dream11").onclick = function() {
-                window.open('dream11.html');
-                // <a href = ""> </a>
-            }
-        </script> -->
     </head>
     <body>
         <div class = "header">
@@ -82,24 +74,6 @@
         </div>
         <br>
         <br>
-        <!-- <div id = "upload" >
-            <p>
-                Upload a file to view the analysis: &emsp;
-                <button id = "Browse">Browse</button> &emsp;
-                <button id = "Anlayse">Anlayse</button>            
-            </p>
-        </div>
-        <br>
-        <br>
-        <div>
-            <p id = "analyse">
-                <button id = "New">Anlayse New Data</button> &emsp;
-                <button id = "Old">Anlayse Old Data (of given 10 matches)</button> &emsp;
-                <button name = "All">Anlayse All Data</button>
-            </p>
-        </div>
-        <br>
-        <br> -->
         <div>
             <p>
             <button id = "Dream11" onclick="window.open('dream11.php');">Dream XI</button>
@@ -124,8 +98,6 @@
                     $points = $value['points'];
                     echo "<tr><td><a href='player.php?name=".$name." '> ",$name,"</a></td><td>",$role,"</td><td>",$team,"</td><td>",$points,"</td></tr>" ;
                 }
-                // $temperatureMin = $json['daily']['data'][0]['temperatureMin'];
-                // echo "<tr><td> Player Name </td><td> Role </td><td> Team </td><td> Points </td></tr>" ;
             ?>
         </table>
     </body>
