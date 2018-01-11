@@ -40,43 +40,8 @@ class Player(object):
         }
         return player
 
-    # def resolve_name_team_role(self, name, team):
-    #     name_team_role = [name, team, "undefined"]
-    #     start = -1000
-    #     end = 1000
-    #     row_num = 0
-    #     flag = 0
-    #     for p in self.players_list:
-    #         if p[0].strip().lower() == team.strip().lower():
-    #             if start == -1000:
-    #                 start = row_num
-    #             end = row_num
-    #             if p[2].strip().lower() == name.strip().lower():
-    #                 name_team_role[0] = p[2]
-    #                 name_team_role[1] = p[0]
-    #                 name_team_role[2] = p[1]
-    #                 flag = 1
-    #                 break
-    #         row_num += 1
-    #     if flag == 0:
-    #         for p in self.players_list[start: end+1]:
-    #             if p[0].strip().lower() == team.strip().lower():
-    #                 if p[3].strip().lower() == name.strip().lower():
-    #                     name_team_role[0] = p[2]
-    #                     name_team_role[1] = p[0]
-    #                     name_team_role[2] = p[1]
-    #                     flag = 1
-    #                     break
-    #                 if p[4].strip().lower() == name.strip().lower():
-    #                     name_team_role[0] = p[2]
-    #                     name_team_role[1] = p[0]
-    #                     name_team_role[2] = p[1]
-    #                     flag = 1
-    #                     break
-    #             row_num += 1
-    #     return name_team_role
-
     def resolve_name_team_role(self, name, team):
+        # we check for the full name first, as it is far more accurate, coz there may be same first or last names in the same team.
         name_team_role = [name, team, "undefined"]
         for p in self.players_list:
             if p[0].strip().lower() == team.strip().lower():
