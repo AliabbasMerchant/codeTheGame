@@ -1,6 +1,5 @@
 import json
 
-
 class dream11(object):
     batsmen = []
     bowlers = []
@@ -26,11 +25,8 @@ class dream11(object):
 
     def merge(self, player, List, no):
         List.append(player)
-        List.sort(key = self.points, reverse = True)
+        List.sort(key=lambda x: x["points"], reverse = True)
         return List[0:no]
-
-    def points(self, elem):
-        return elem["points"]
 
     def save_to_json(self):
         team = self.join()
@@ -39,13 +35,13 @@ class dream11(object):
 
     def join(self):
         team = {}
-        self.bowlers.sort(key=self.points, reverse=True)
+        self.bowlers.sort(key=lambda x: x["points"], reverse=True)
         self.bowlers = self.bowlers[0:self.bowl]
-        self.batsmen.sort(key=self.points, reverse=True)
+        self.batsmen.sort(key=lambda x: x["points"], reverse=True)
         self.batsmen = self.batsmen[0:self.bat]
-        self.wicket_keepers.sort(key=self.points, reverse=True)
+        self.wicket_keepers.sort(key=lambda x: x["points"], reverse=True)
         self.wicket_keepers = self.wicket_keepers[0:self.wicket]
-        self.all_rounders.sort(key=self.points, reverse=True)
+        self.all_rounders.sort(key=lambda x: x["points"], reverse=True)
         self.all_rounders = self.all_rounders[0:self.all]
 
         for player in self.bowlers:
