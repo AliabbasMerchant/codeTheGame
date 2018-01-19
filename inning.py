@@ -1,8 +1,14 @@
+import Player
+import json
+import csv
+import re
+
+
 class Inning(object):
 
     def __init__(self):
         self.data = {}
-        self.name_of_file =""
+        self.name_of_file = ""
 
     def read_csv(self, file):
         ifile = open(file)
@@ -15,7 +21,7 @@ class Inning(object):
         row_num = 0
         for ball in self.csv:
             if row_num == 0:
-                self.name_of_file = re.sub('\W+', ' ', ball[0]+" "+ball[1]+" "+ball[2]).strip()
+                self.name_of_file = re.sub('\W+', ' ', ball[0] + " " + ball[1] + " " + ball[2]).strip()
                 self.team_bat = ball[0].strip()
                 self.team_bowl = ball[2].strip()
             elif row_num == 1:
@@ -58,7 +64,7 @@ class Inning(object):
                     self.data[name_team_role[0]]["runs_conceded"] += runs
                     if extra:
                         self.data[name_team_role[0]]["extras"] += 1
-                        self.data[name_team_role[0]]["runs_conceded"] += 1 # the run of the extra
+                        self.data[name_team_role[0]]["runs_conceded"] += 1  # the run of the extra
                     if wicket:
                         self.data[name_team_role[0]]["wickets"] += 1
                     if runs == 0:
@@ -98,11 +104,11 @@ class Inning(object):
             row_num += 1
 
     def save_to_json(self):
-        file_name = self.name_of_file+"_data.json"
+        file_name = self.name_of_file + "_data.json"
         print(file_name)
         for p in self.data:
-            print("    "+self.data[p]["name"]+"  "+self.data[p]["team"])
-        with open( file_name , "w") as outfile:
+            print("    " + self.data[p]["name"] + "  " + self.data[p]["team"])
+        with open(file_name, "w") as outfile:
             json.dump(self.data, outfile, sort_keys=True, indent=4)
         self.data = {}
         return file_name
@@ -134,7 +140,7 @@ class Inning(object):
 
         points = 0
         for player in self.data:
-            if float(self.data[player]["runs"]) == 0 and self.data[player]["team"] == self.team_bat :
+            if float(self.data[player]["runs"]) == 0 and self.data[player]["team"] == self.team_bat:
                 self.data[player]["duck"] = 1
             if float(self.data[player]["runs"]) >= 100.0:
                 self.data[player]["hundreds"] = 1
@@ -146,7 +152,8 @@ class Inning(object):
             if self.data[player]["wickets"] == 4:
                 self.data[player]["four_w"] = 1
             if self.data[player]["balls_bowled"] > 0:
-                self.data[player]["economy"] = 6 * (self.data[player]["runs_conceded"] / self.data[player]["balls_bowled"])
+                self.data[player]["economy"] = 6 * (
+                        self.data[player]["runs_conceded"] / self.data[player]["balls_bowled"])
             if self.data[player]["balls_batted"] >= 10:
                 self.data[player]["strike"] = (self.data[player]["runs"] / self.data[player]["balls_batted"]) * 100
             else:
@@ -164,7 +171,7 @@ class Inning(object):
             points += float(self.data[player]["maidens"]) * maiden_score
             points += float(self.data[player]["extras"]) * extras_score
             points += float(self.data[player]["field"]) * field_score
-            
+
             if self.data[player]["team"] == self.team_bowl:
                 if float(self.data[player]["economy"]) < 4.0:
                     points += economy_0_4
@@ -172,14 +179,15 @@ class Inning(object):
                     points += economy_4_5
                 elif float(self.data[player]["economy"]) < 6.0:
                     points += economy_5_6
-                if self.data[player]["role"].strip().lower() == "BOWLER".strip().lower() or self.data[player]["role"].strip().lower() == "ALL ROUNDER".strip().lower():
+                if self.data[player]["role"].strip().lower() == "BOWLER".strip().lower() or self.data[player][
+                    "role"].strip().lower() == "ALL ROUNDER".strip().lower():
                     if float(self.data[player]["economy"]) >= 11.0:
                         points += economy_11_above
                     elif float(self.data[player]["economy"]) >= 10.0:
                         points += economy_10_11
                     elif float(self.data[player]["economy"]) >= 9.0:
                         points += economy_9_10
-            
+
             if self.data[player]["role"].strip().lower() != "BOWLER".strip().lower():
                 if self.data[player]["balls_batted"] >= 10:
                     if float(self.data[player]["strike"]) < 50:
@@ -189,5 +197,5 @@ class Inning(object):
                     elif float(self.data[player]["strike"]) < 70:
                         points += strike_60_70
                 points += float(self.data[player]["duck"]) * duck_score
-            
+
             self.data[player]["points"] = points
