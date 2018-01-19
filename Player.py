@@ -1,6 +1,5 @@
 import csv
 
-
 class Player(object):
     players_list = []
 
@@ -10,7 +9,6 @@ class Player(object):
             self.players_list = list(reader)
 
     def return_dict(self, name_team_role):
-        # name_team_role = resolve_name_team_role(name)
         player = {
             "name": name_team_role[0],  # str
             "team": name_team_role[1],  # str
@@ -41,7 +39,6 @@ class Player(object):
         return player
 
     def resolve_name_team_role(self, name, team):
-        # we check for the full name first, as it is far more accurate, coz there may be same first or last names in the same team.
         name_team_role = [name, team, "undefined"]
         for p in self.players_list:
             if p[0].strip().lower() == team.strip().lower():
