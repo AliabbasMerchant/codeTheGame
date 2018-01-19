@@ -1,5 +1,6 @@
 import csv
 
+
 class Player(object):
     players_list = []
 
@@ -30,11 +31,11 @@ class Player(object):
             "duck": 0,
             "extras": 0,
             "points": 0.0,
-            "economy": 0.0,  #dont add
-            "strike": 0.0,  #dont add
-            "average_runs": 0.0,  #dont add
-            "average_wickets": 0.0,  #dont add
-            "average_field": 0.0,  #dont add
+            "economy": 0.0,  # don't add
+            "strike": 0.0,  # don't add
+            "average_runs": 0.0,  # don't add
+            "average_wickets": 0.0,  # don't add
+            "average_field": 0.0,  # don't add
         }
         return player
 
