@@ -1,13 +1,8 @@
-from pprint import pprint
-
-import Player
-import json
-import csv
-import re
-
 class Inning(object):
-    data = {}
-    name_of_file =""
+
+    def __init__(self):
+        self.data = {}
+        self.name_of_file =""
 
     def read_csv(self, file):
         ifile = open(file)
@@ -109,8 +104,8 @@ class Inning(object):
             print("    "+self.data[p]["name"]+"  "+self.data[p]["team"])
         with open( file_name , "w") as outfile:
             json.dump(self.data, outfile, sort_keys=True, indent=4)
-        # print(file_name)  # SRH vs RCB_data.json
         self.data = {}
+        return file_name
 
     def calculate_scores(self):
         run_score = 0.5
@@ -169,7 +164,7 @@ class Inning(object):
             points += float(self.data[player]["maidens"]) * maiden_score
             points += float(self.data[player]["extras"]) * extras_score
             points += float(self.data[player]["field"]) * field_score
-
+            
             if self.data[player]["team"] == self.team_bowl:
                 if float(self.data[player]["economy"]) < 4.0:
                     points += economy_0_4
@@ -184,7 +179,7 @@ class Inning(object):
                         points += economy_10_11
                     elif float(self.data[player]["economy"]) >= 9.0:
                         points += economy_9_10
-
+            
             if self.data[player]["role"].strip().lower() != "BOWLER".strip().lower():
                 if self.data[player]["balls_batted"] >= 10:
                     if float(self.data[player]["strike"]) < 50:
@@ -194,6 +189,5 @@ class Inning(object):
                     elif float(self.data[player]["strike"]) < 70:
                         points += strike_60_70
                 points += float(self.data[player]["duck"]) * duck_score
-
+            
             self.data[player]["points"] = points
-    
